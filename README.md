@@ -5,6 +5,12 @@
 
 Using MicroStream with Kotlin. The HelloWorld but now in the Kotlin Language.
 
+## microstream-list-db
+
+Demonstrates several concepts
+- Using singleton to make root object accessible everywhere
+- Using a mutable list internally and expose an immutable list to the rest of the program.
+
 
 ## ktor for Jakarta EE developers
 
