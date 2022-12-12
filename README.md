@@ -11,6 +11,10 @@ Demonstrates several concepts
 - Using singleton to make root object accessible everywhere
 - Using a mutable list internally and expose an immutable list to the rest of the program.
 
+## microstream-ktor
+
+Using MicroStream in combination with Ktor.
+
 
 ## ktor for Jakarta EE developers
 
