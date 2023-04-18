@@ -17,12 +17,7 @@ fun Route.bookRouting() {
 
         get("{isbn?}") {
             // The isbn is missing when we have URL ending in /
-            val isbn = call.parameters["isbn"] ?: return@get call.respond(
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    ExceptionResponse("Missing isbn", HttpStatusCode.BadRequest.value)
-                )
-            )
+            val isbn = URLParameters.extractIsbn(this)
             // Find book by ISBN
             val book = BookService.getBookByISBN(isbn) ?: throw BookEntityNotFoundException(isbn)
             call.respond(book)

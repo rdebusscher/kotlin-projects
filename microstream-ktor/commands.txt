@@ -1,4 +1,4 @@
-Set as JVM options to have developer feedback
+Set as JVM options to have developer feedback (shows stacktraces in status 500 returns)
 
 -Dapp.debug=true
 

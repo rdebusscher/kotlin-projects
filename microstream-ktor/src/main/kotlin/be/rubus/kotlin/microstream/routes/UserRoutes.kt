@@ -2,10 +2,9 @@ package be.rubus.kotlin.microstream.routes
 
 import be.rubus.kotlin.microstream.database.DB
 import be.rubus.kotlin.microstream.dto.CreateUser
-import be.rubus.kotlin.microstream.exception.ExceptionResponse
 import be.rubus.kotlin.microstream.exception.types.MissingBodyPropertyException
+import be.rubus.kotlin.microstream.exception.types.UserEntityByEmailNotFoundException
 import be.rubus.kotlin.microstream.service.UserService
-import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -27,19 +26,9 @@ fun Route.userRouting() {
         }
         get("/by/{email?}") {
             // The email is missing when we have URL ending in /
-            val email = call.parameters["email"] ?: return@get call.respond(
-                call.respond(
-                    HttpStatusCode.BadRequest,
-                    ExceptionResponse("Missing email", HttpStatusCode.BadRequest.value)
-                )
-            )
+            val email = URLParameters.extractEmail(this)
 
-            val user = UserService.findByEmail(email) ?: return@get call.respond(
-                call.respond(
-                    HttpStatusCode.NotFound,
-                    ExceptionResponse("No User with email", HttpStatusCode.NotFound.value)
-                )
-            )
+            val user = UserService.findByEmail(email) ?: throw UserEntityByEmailNotFoundException(email)
             call.respond(user)
         }
 

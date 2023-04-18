@@ -13,7 +13,7 @@ fun main() {
 }
 
 fun Application.module() {
-    // Extension function on Application that delegates to another extension functions
+    // Extension function on Application that delegates to other extension functions
     configureSerialization()
     configureRouting()
     configureExceptions()
