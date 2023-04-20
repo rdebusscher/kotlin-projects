@@ -1,0 +1,52 @@
+Set as JVM options to have developer feedback
+
+-Dapp.debug=true
+
+
+# List all users
+curl  'http://localhost:8080/user'
+
+# List non-existing  user -> status 404
+curl -v 'http://localhost:8080/user/abc'
+
+# List user by email.
+curl  'http://localhost:8080/user/by/jane.doe@acme.org'
+
+# Add user
+curl -X POST 'http://localhost:8080/user' \
+--header 'Content-Type: application/json' \
+--data-raw '{"name": "Rudy", "email": "rudy@microstream.one"}'
+
+# -> note the id of this added user and use it in the other commands of this file
+
+
+# List all books
+curl  'http://localhost:8080/book'
+
+# Book with specific isbn
+curl  'http://localhost:8080/book/9780140707342'
+
+# Book with non existing isbn
+curl -v 'http://localhost:8080/book/1234567890'
+
+# List books of user (use id of added user)
+curl  'http://localhost:8080/user/255f0c26-8e9c-4575-8857-e3e74bea6edb/book'
+
+# Add book to user (use id of added user)
+curl -X POST 'http://localhost:8080/user/255f0c26-8e9c-4575-8857-e3e74bea6edb/book/9780141321097'
+
+# List again
+curl  'http://localhost:8080/user/255f0c26-8e9c-4575-8857-e3e74bea6edb/book'
+
+# Update user
+
+curl -X PATCH 'http://localhost:8080/user/255f0c26-8e9c-4575-8857-e3e74bea6edb' \
+--header 'Content-Type: application/json' \
+--data-raw '{"email": "r.debusscher@microstream.one"}'
+
+
+## Stop and start application
+# Are data stored?
+
+curl  'http://localhost:8080/user'
+curl  'http://localhost:8080/user/255f0c26-8e9c-4575-8857-e3e74bea6edb/book'
