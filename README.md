@@ -11,12 +11,25 @@ Demonstrates several concepts
 - Using singleton to make root object accessible everywhere
 - Using a mutable list internally and expose an immutable list to the rest of the program.
 
+## Kotlin integrations
+
+Some experimental Kotlin integrations can be found at this branch of the MicroStream repository https://github.com/microstream-one/microstream/tree/experimental/kotlin
+
+Have a look at the integrations/kotlin module.
+
+These artefacts are required for the following MicroStream with Ktor examples
+
 ## microstream-ktor
 
-Using MicroStream in combination with Ktor.
+Using MicroStream in combination with Ktor. Makes use of the MicroStream Kotlin configuration extension.
 
+## microstream-kodein
+
+Using MicroStream in combination with Ktor and Codeine. Makes use of the MicroStream Kotlin configuration and Kodein extensions.
 
 ## ktor for Jakarta EE developers
+
+(Will be moved to https://github.com/rdebusscher/Project_FF)
 
 See _ktor-basic_ directory for an application that define REST endpoints and support JSON-B and JSON-P alike functionality.
 
