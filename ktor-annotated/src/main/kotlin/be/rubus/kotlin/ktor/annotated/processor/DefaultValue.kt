@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package be.rubus.kotlin.ktor.annotated.plugins
+package be.rubus.kotlin.ktor.annotated.processor
 
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.application.*
-import io.ktor.server.plugins.contentnegotiation.*
-
-fun Application.configureSerialization() {
-    install(ContentNegotiation) {
-        json()
-    }
-}
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.VALUE_PARAMETER)
+annotation class DefaultValue(val value: String)

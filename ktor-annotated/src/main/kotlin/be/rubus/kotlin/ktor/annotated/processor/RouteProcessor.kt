@@ -1,3 +1,18 @@
+/**
+ * Copyright 2022-2023 Rudy De Busscher (https://www.atbash.be)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package be.rubus.kotlin.ktor.annotated.processor
 
 import be.rubus.kotlin.ktor.annotated.exception.ExceptionResponse
@@ -8,6 +23,7 @@ import io.ktor.server.routing.*
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.callSuspendBy
 import kotlin.reflect.full.declaredMemberFunctions
+import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.jvm.javaType
 
 /**
@@ -94,10 +110,21 @@ object RouteProcessor {
                 call.parameters.contains(it.name ?: "") -> it to call.parameters[it.name ?: ""]
                 else -> {
                     if (!it.type.isMarkedNullable) {
-                        it.name ?: throw UnsupportedOperationException("Un-named parameters on functions are not supported")
+                        it.name
+                            ?: throw UnsupportedOperationException("Un-named parameters on functions are not supported")
                         requiredMissingParameters.add(it.name!!)
                     }
-                    it to null
+                    val defaultValue = it.findAnnotation<DefaultValue>()?.value?.let { value ->
+                        when (it.type.classifier) {
+                            String::class -> value
+                            Int::class -> value.toInt()
+                            Long::class -> value.toLong()
+                            Boolean::class -> value.toBoolean()
+                            // Add more type handling as needed
+                            else -> throw IllegalArgumentException("Unsupported type: ${it.type}")
+                        }
+                    }
+                    it to defaultValue
                 }
             }
         }
