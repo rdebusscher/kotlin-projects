@@ -23,8 +23,8 @@ import be.rubus.kotlin.ktor.model.Book
  * An example of a service for showcasing the different exceptions.
  */
 object BookService {
-    fun getBook(bookId: String): Book {
-        if (bookId == "9780747532743") {
+    fun getBook(bookId: Long): Book {
+        if (bookId == 9780747532743) {
             return Book("9780747532743", "Harry Potter", "Rowling, J.K.", 2000)
         }
         throw BookEntityNotFoundException(bookId)

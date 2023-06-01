@@ -16,6 +16,6 @@
 package be.rubus.kotlin.ktor.exception.types
 
 /**
- * Exception thrown when a URL or query parameter has the wrong type.
+ * Exception thrown when a URL or query parameter is not present.
  */
-class HasMissingParameterException(message: String) : ParameterException(message)
+open class ParameterException(message: String) : RuntimeException(message)

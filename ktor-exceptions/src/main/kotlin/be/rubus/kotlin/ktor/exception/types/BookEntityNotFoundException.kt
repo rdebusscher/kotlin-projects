@@ -19,6 +19,6 @@ import be.rubus.kotlin.ktor.exception.BusinessException
 import be.rubus.kotlin.ktor.exception.EntityNotFoundException
 import be.rubus.kotlin.ktor.exception.MessageCode
 
-class BookEntityNotFoundException(isbn: String) :
+class BookEntityNotFoundException(isbn: Long) :
     BusinessException(MessageCode.BOOK_NOT_FOUND, "The book with ISBN $isbn could not be found.")
     , EntityNotFoundException

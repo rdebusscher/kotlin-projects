@@ -15,7 +15,7 @@
  */
 package be.rubus.kotlin.ktor.exception
 
-import be.rubus.kotlin.ktor.exception.types.HasMissingParameterException
+import be.rubus.kotlin.ktor.exception.types.ParameterException
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -48,14 +48,14 @@ object ExceptionHandler {
                 )
             }
 
-            is HasMissingParameterException -> {
-                // The client forgot to define a Path or Query parameter
+            is ParameterException -> {
+                // The client forgot to define a Path or Query parameter or used a wrong type (string and not a number)
                 call.respond(
                     HttpStatusCode.BadRequest,
                     ExceptionResponse(cause.message ?: cause.toString(), HttpStatusCode.BadRequest.value)
                 )
             }
-            // We can hac other categories
+            // We can hav other categories
             else -> {
                 // All the other Exceptions become status 500, with more info in development mode.
                 if (developmentMode) {
