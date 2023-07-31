@@ -1,10 +1,8 @@
 package be.rubus.kotlin.microstream.routes
 
 import be.rubus.kotlin.microstream.database.DB
-import be.rubus.kotlin.microstream.exception.ExceptionResponse
 import be.rubus.kotlin.microstream.exception.types.BookEntityNotFoundException
 import be.rubus.kotlin.microstream.service.BookService
-import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

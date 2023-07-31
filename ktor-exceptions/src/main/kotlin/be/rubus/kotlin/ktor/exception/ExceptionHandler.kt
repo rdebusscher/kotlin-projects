@@ -55,7 +55,7 @@ object ExceptionHandler {
                     ExceptionResponse(cause.message ?: cause.toString(), HttpStatusCode.BadRequest.value)
                 )
             }
-            // We can hav other categories
+            // We can have other categories
             else -> {
                 // All the other Exceptions become status 500, with more info in development mode.
                 if (developmentMode) {
