@@ -27,6 +27,10 @@ Using MicroStream in combination with Ktor. Makes use of the MicroStream Kotlin 
 
 Using MicroStream in combination with Ktor and Codeine. Makes use of the MicroStream Kotlin configuration and Kodein extensions.
 
+## Kotlin Exposed
+
+An abstraction over JDBC calls within Kotlin using the Exposed library https://github.com/JetBrains/Exposed.  The project contains also an example of using a DAO type of access on to of the SQL light way.
+
 ## ktor for Jakarta EE developers
 
 (Will be moved to https://github.com/rdebusscher/Project_FF)
